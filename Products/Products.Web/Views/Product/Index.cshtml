@@ -1,0 +1,42 @@
+﻿@model IEnumerable<Products.Domain.Models.Product>
+
+@{
+    ViewData["Title"] = "Products";
+}
+
+<div>
+    <h1>Products</h1>
+
+    <p>
+        <a asp-action="Create">Create New</a>
+    <p>
+
+    <table id="tblProducts" class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Category</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                <td>@Html.DisplayFor(modelItem => item.Description)</td>
+                <td>@Html.DisplayFor(modelItem => item.Price)</td>
+                <td>@Html.DisplayFor(modelItem => item.Category.Name)</td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { productId=item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { productId=item.Id })
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+

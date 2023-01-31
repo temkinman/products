@@ -44,14 +44,26 @@ public class ProductRepository : IProductRepository
         }
     }
 
+    public async Task<List<Product>> GetAllProductsAsync()
+    {
+        return await _appDbContext.Products
+                                        .Include(p => p.Category)
+                                        .AsNoTracking()
+                                        .ToListAsync();
+    }
+
     public async Task<Product?> GetProductByIdAsync(Guid productId)
     {
-        return await _appDbContext.Products.FirstOrDefaultAsync(p => p.Id == productId);
+        return await _appDbContext.Products
+                                        .AsNoTracking()
+                                        .FirstOrDefaultAsync(p => p.Id == productId);
     }
 
     public async Task<List<Product>> GetProductsByCategoryIdAsync(Guid categoryId)
     {
-        return await _appDbContext.Products.Where(p => p.CategoryId == categoryId).ToListAsync();
+        return await _appDbContext.Products
+                                        .AsNoTracking()
+                                        .Where(p => p.CategoryId == categoryId).ToListAsync();
     }
 
     public async Task<bool> UpdateProductAsync(Product product)

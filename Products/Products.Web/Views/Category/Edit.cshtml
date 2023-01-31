@@ -1,0 +1,34 @@
+﻿@model Products.Domain.Models.Category
+
+@{
+    ViewData["Title"] = "Edit Category";
+}
+
+<div>
+    <h1>Create Product</h1>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Edit" asp-controller="Category" method="post">
+                <input type="hidden" asp-for="Id" />
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-group d-flex justify-content-between mt-4">
+                    <input type="submit" value="Save" class="btn btn-outline-primary" />
+                    <a id="cancelBtn" asp-action="Index" value="Cancel" class="btn btn-outline-danger">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+

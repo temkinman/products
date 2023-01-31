@@ -38,6 +38,11 @@ public class CategoryService : ICategoryService
         return await _categoryRepository.GetAllCategoriesAsync();
     }
 
+    public async Task<Category?> GetCategoryByIdAsync(Guid categoryId)
+    {
+        return await _categoryRepository.GetByIdAsync(categoryId);
+    }
+
     public async Task<bool> UpdateCategoryAsync(Category category)
     {
         var updatedCategory = _categoryRepository.GetByIdAsync(category.Id);

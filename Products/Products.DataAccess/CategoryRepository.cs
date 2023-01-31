@@ -45,12 +45,16 @@ public class CategoryRepository : ICategoryRepository
 
     public async Task<List<Category>> GetAllCategoriesAsync()
     {
-        return await _appDbContext.Categories.ToListAsync();
+        return await _appDbContext.Categories
+                                        .AsNoTracking()
+                                        .ToListAsync();
     }
 
     public async Task<Category?> GetByIdAsync(Guid categoryId)
     {
-        return await _appDbContext.Categories.FirstOrDefaultAsync(c => c.Id == categoryId);
+        return await _appDbContext.Categories
+                                        .AsNoTracking()
+                                        .FirstOrDefaultAsync(c => c.Id == categoryId);
     }
 
     public async Task<bool> UpdateCategoryAsync(Category category)
