@@ -1,0 +1,29 @@
+﻿@model IEnumerable<Products.Web.Models.CategoryProductViewModel>
+
+@{
+    ViewData["Title"] = "Products assigned with category";
+}
+
+<div>
+    <h1>Products assigned with category</h1>
+
+    <table id="tblProducts" class="table">
+        <thead>
+            <tr>
+                <th>Category</th>
+                <th>Product</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.Category)</td>
+                <td>@Html.DisplayFor(modelItem => item.Product)</td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
