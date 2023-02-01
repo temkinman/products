@@ -7,6 +7,7 @@ public class CategoryService : ICategoryService
 {
     private readonly ICategoryRepository _categoryRepository;
 
+
     public CategoryService(ICategoryRepository categoryRepository)
     {
         _categoryRepository = categoryRepository;
@@ -41,6 +42,11 @@ public class CategoryService : ICategoryService
     public async Task<Category?> GetCategoryByIdAsync(Guid categoryId)
     {
         return await _categoryRepository.GetByIdAsync(categoryId);
+    }
+
+    public async Task<List<GroupProduct>> GetGroupProductsAsync()
+    {
+        return await _categoryRepository.GetGroupProductsAsync();
     }
 
     public async Task<bool> UpdateCategoryAsync(Category category)

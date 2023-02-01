@@ -1,26 +1,38 @@
-﻿@model IEnumerable<Products.Web.Models.CategoryProductViewModel>
+﻿@model IEnumerable<Products.Domain.Models.GroupProduct>
 
 @{
     ViewData["Title"] = "Products assigned with category";
 }
 
 <div>
-    <h1>Products assigned with category</h1>
-
-    <table id="tblProducts" class="table">
+    <h1>Group Products by category</h1>
+    <table class="table">
         <thead>
             <tr>
                 <th>Category</th>
-                <th>Product</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var item in Model)
             {
-            <tr>
-                <td>@Html.DisplayFor(modelItem => item.Category)</td>
-                <td>@Html.DisplayFor(modelItem => item.Product)</td>
-            </tr>
+                @if (item.Products.Any())
+                {
+                    <tr>
+                        <th colspan="2" class="bg-secondary text-white">@Html.DisplayFor(modelItem => item.Category)</th>
+                    </tr>
+                    <tr>
+                        <th class="bg-light text-dark">Product</th>
+                        <th class="bg-light text-dark">Price</th>
+                    </tr>        
+                }
+
+                @foreach (var product in item.Products)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => product.Name)</td>
+                        <td>@Html.DisplayFor(modelItem => product.Price)</td>
+                    </tr>        
+                }
             }
         </tbody>
     </table>

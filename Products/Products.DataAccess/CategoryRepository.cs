@@ -57,6 +57,20 @@ public class CategoryRepository : ICategoryRepository
                                         .FirstOrDefaultAsync(c => c.Id == categoryId);
     }
 
+    public async Task<List<GroupProduct>> GetGroupProductsAsync()
+    {
+        return await _appDbContext.Categories.GroupJoin(_appDbContext.Products,
+                    category => category.Id,
+                    product => product.CategoryId,
+                    (category, productsGroup) => new GroupProduct
+                    {
+                        Category = category.Name,
+                        Products = productsGroup
+                    }
+                ).AsNoTracking()
+                .ToListAsync();
+    }
+
     public async Task<bool> UpdateCategoryAsync(Category category)
     {
         try
