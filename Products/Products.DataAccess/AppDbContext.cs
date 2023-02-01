@@ -17,7 +17,8 @@ public class AppDbContext : DbContext
         modelBuilder.Entity<Product>()
             .HasOne(c => c.Category)
             .WithMany(c => c.Products)
-            .HasForeignKey(c => c.CategoryId);
+            .HasForeignKey(c => c.CategoryId)
+            .OnDelete(DeleteBehavior.SetNull);
     }
 
     public DbSet<Product> Products { get; set; }
